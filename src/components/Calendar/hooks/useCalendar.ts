@@ -72,9 +72,12 @@ export const useCalendar = (initialDate: Date = new Date()) => {
     return days;
   });
 
-  const selectDate = (date: Date) => {
-    console.log(date);
+  const selectDate = (date?: Date) => {
+    if (!date) return;
+
     selectedDate.value = date;
+
+    return date;
   };
 
   const headerTitle = computed(() => {

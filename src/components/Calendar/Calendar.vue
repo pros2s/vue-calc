@@ -1,8 +1,10 @@
 <script setup lang="ts">
-import { WEEK_DAYS } from './consts/weekDays';
-import Header from './Header/Header.vue';
+import Header from './Children/Header/Header.vue';
+import WeekDays from './Children/WeekDays/WeekDays.vue';
+
 import { useCalendar,  } from './hooks/useCalendar';
-import WeekDays from './WeekDays/WeekDays.vue';
+
+import { WEEK_DAYS } from './consts/weekDays';
 
 const {
   headerTitle,
@@ -11,12 +13,6 @@ const {
   nextMonth,
   selectDate
 } = useCalendar()
-
-const handleDayClick = (date?: Date) => {
-  if (!date) return;
-
-  selectDate(date)
-}
 </script>
 
 <template>
@@ -32,7 +28,7 @@ const handleDayClick = (date?: Date) => {
 				:key="index"
         :day="day"
 				:class="{ day: true, empty: !day }"
-        @click="handleDayClick(day?.date)"
+        @click="selectDate(day?.date)"
 			>
 				{{ day?.day ?? '' }}
 			</button>
