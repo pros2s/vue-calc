@@ -7,13 +7,13 @@ const emit = defineEmits<HeaderEmitsI>();
 
 <template>
   <div class="calendar-header">
-    <button class="nav-btn" @click="emit('prev')" aria-label="Previous month">
+    <button class="nav-btn" aria-label="Previous month" @click="emit('prev')">
       <span class="arrow left-arrow" />
     </button>
 
     <p>{{ title }}</p>
 
-    <button class="nav-btn" @click="emit('next')" aria-label="Next month">
+    <button class="nav-btn" aria-label="Next month" @click="emit('next')">
       <span class="arrow right-arrow" />
     </button>
   </div>

@@ -1,7 +1,7 @@
 .calendar {
   max-width: 320px;
-  border: 1px solid gray;
   margin: auto;
+  border: 1px solid gray;
 }
 
 .days {

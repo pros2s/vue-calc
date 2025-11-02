@@ -12,13 +12,7 @@ const props = defineProps<CalendarPropsI>();
 
 const initialDate = useInitialDate(props.initialDate);
 
-const {
-  headerTitle,
-  calendarGrid,
-  prevMonth,
-  nextMonth,
-  selectDate
-} = useCalendar(initialDate.value);
+const { headerTitle, calendarGrid, prevMonth, nextMonth, selectDate } = useCalendar(initialDate.value);
 
 if (props.initialDate) {
   selectDate(initialDate.value);
@@ -26,26 +20,26 @@ if (props.initialDate) {
 
 const handleDayClick = (date: Date | null) => {
   selectDate(date);
-}
+};
 </script>
 
 <template>
-	<div class="calendar">
-    <Header :title="headerTitle" @prev="prevMonth" @next="nextMonth"/>
+  <div class="calendar">
+    <Header :title="headerTitle" @prev="prevMonth" @next="nextMonth" />
 
-		<WeekDays :week-days="WEEK_DAYS"/>
+    <WeekDays :week-days="WEEK_DAYS" />
 
-		<div class="days">
-			<Day
+    <div class="days">
+      <Day
         v-for="(day, index) in calendarGrid"
         :key="new Date().getTime() + index"
         :day="day"
         @click="handleDayClick"
       />
-		</div>
-	</div>
+    </div>
+  </div>
 </template>
 
 <style scoped>
-@import './calendar.css'
+@import './calendar.css';
 </style>

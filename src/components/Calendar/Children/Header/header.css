@@ -1,14 +1,15 @@
 .calendar-header {
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  font-size: 1.1rem;
+  justify-content: space-between;
+
   margin-bottom: 10px;
+
+  font-size: 1.1rem;
 }
 
 .nav-btn {
   padding: 16px;
-
   transition: background-color 0.1s linear;
 
   &:hover {
@@ -21,6 +22,7 @@
 
   .arrow {
     display: block;
+
     width: 0;
     height: 0;
     border-top: 5px solid transparent;

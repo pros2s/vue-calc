@@ -1,7 +1,7 @@
 .day {
-  text-align: center;
   padding: 10px;
   border: 1px solid transparent;
+  text-align: center;
 
   &:hover {
     background-color: #313131;

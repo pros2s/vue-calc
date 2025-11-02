@@ -15,9 +15,9 @@ const emit = defineEmits<DayEmitsI>();
       today: isToday,
       selected: isSelected,
     }"
-    @click="emit('click', date)"
     :aria-label="date?.toLocaleDateString('ru-RU')"
     :aria-pressed="isSelected"
+    @click="emit('click', date)"
   >
     {{ day }}
   </button>

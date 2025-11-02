@@ -1,6 +1,6 @@
 .weekdays {
   display: flex;
   justify-content: space-around;
-  font-size: 0.8rem;
   padding: 10px 0;
+  font-size: 0.8rem;
 }
