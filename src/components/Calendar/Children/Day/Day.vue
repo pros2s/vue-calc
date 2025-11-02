@@ -1,8 +1,7 @@
 <script setup lang="ts">
 import type { DayEmitsI, DayPropsI } from './DayTypes';
 
-const props = defineProps<DayPropsI>();
-const { date = null, day = '', isSelected = false, isToday = false } = props.day ?? {};
+defineProps<DayPropsI>();
 
 const emit = defineEmits<DayEmitsI>();
 </script>
@@ -11,15 +10,15 @@ const emit = defineEmits<DayEmitsI>();
   <button
     :class="{
       day: true,
-      empty: !day,
-      today: isToday,
-      selected: isSelected,
+      empty: !day?.isCurrentMonth,
+      today: day?.isToday,
+      selected: day?.isSelected,
     }"
-    :aria-label="date?.toLocaleDateString('ru-RU')"
-    :aria-pressed="isSelected"
-    @click="emit('click', date)"
+    :aria-label="day?.date?.toLocaleDateString('ru-RU')"
+    :aria-pressed="day?.isSelected"
+    @click="emit('click', day?.date ?? null)"
   >
-    {{ day }}
+    {{ day?.day }}
   </button>
 </template>
 

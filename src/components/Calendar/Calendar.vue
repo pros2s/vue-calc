@@ -7,6 +7,7 @@ import type { CalendarPropsI } from './CalendarTypes';
 import { useInitialDate } from './hooks/useInitialDate';
 import { useCalendar } from './hooks/useCalendar';
 import { useChangeLocale } from './hooks/useChangeLocale';
+import LocaleSwitcher from './LocaleSwitcher/LocaleSwitcher.vue';
 
 const props = defineProps<CalendarPropsI>();
 
@@ -40,7 +41,7 @@ const handleDayClick = (date: Date | null) => {
       </div>
     </div>
 
-    <button @click="toggleLocale">{{ locale }}</button>
+    <LocaleSwitcher :locale @toggle-locale="toggleLocale" />
   </div>
 </template>
 

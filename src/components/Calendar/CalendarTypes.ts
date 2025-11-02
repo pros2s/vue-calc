@@ -11,3 +11,5 @@ export type CalendarDaysType = CalendarDayI[];
 export interface CalendarPropsI {
   initialDate?: string;
 }
+
+export type LocaleType = 'ru' | 'en' | 'de';

@@ -6,8 +6,10 @@
 }
 
 .calendar {
+  overflow: hidden;
   max-width: 320px;
   border: 1px solid gray;
+  border-radius: 8px;
 }
 
 .days {
