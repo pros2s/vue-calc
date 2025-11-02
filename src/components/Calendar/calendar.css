@@ -1,6 +1,12 @@
+.container {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  margin: auto;
+}
+
 .calendar {
   max-width: 320px;
-  margin: auto;
   border: 1px solid gray;
 }
 

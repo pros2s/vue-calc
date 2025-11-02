@@ -6,13 +6,18 @@ import Day from './children/Day/Day.vue';
 import type { CalendarPropsI } from './CalendarTypes';
 import { useInitialDate } from './hooks/useInitialDate';
 import { useCalendar } from './hooks/useCalendar';
-import { WEEK_DAYS } from './consts/weekDays';
+import { useChangeLocale } from './hooks/useChangeLocale';
 
 const props = defineProps<CalendarPropsI>();
 
 const initialDate = useInitialDate(props.initialDate);
 
-const { headerTitle, calendarGrid, prevMonth, nextMonth, selectDate } = useCalendar(initialDate.value);
+const { locale, toggleLocale } = useChangeLocale();
+
+const { headerTitle, calendarGrid, weekdays, prevMonth, nextMonth, selectDate } = useCalendar(
+  initialDate.value,
+  locale,
+);
 
 if (props.initialDate) {
   selectDate(initialDate.value);
@@ -24,19 +29,18 @@ const handleDayClick = (date: Date | null) => {
 </script>
 
 <template>
-  <div class="calendar">
-    <Header :title="headerTitle" @prev="prevMonth" @next="nextMonth" />
+  <div class="container">
+    <div class="calendar">
+      <Header :title="headerTitle" @prev="prevMonth" @next="nextMonth" />
 
-    <WeekDays :week-days="WEEK_DAYS" />
+      <WeekDays :week-days="weekdays" />
 
-    <div class="days">
-      <Day
-        v-for="(day, index) in calendarGrid"
-        :key="new Date().getTime() + index"
-        :day="day"
-        @click="handleDayClick"
-      />
+      <div class="days">
+        <Day v-for="day in calendarGrid" :key="day.date.getTime()" :day @click="handleDayClick(day.date)" />
+      </div>
     </div>
+
+    <button @click="toggleLocale">{{ locale }}</button>
   </div>
 </template>
 

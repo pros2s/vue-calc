@@ -1,8 +1,9 @@
-import { computed, ref } from 'vue';
+import { computed, ref, watchEffect, type Ref } from 'vue';
 import type { CalendarDaysType } from '../CalendarTypes';
-import { MONTH_NAMES } from '../consts/monthNames';
+import type { LocaleType } from '../../../AppTypes';
+import { locales } from '../consts/config';
 
-export const useCalendar = (initialDate: Date = new Date()) => {
+export const useCalendar = (initialDate: Date = new Date(), localeRef: Ref<LocaleType>) => {
   const currentYear = ref(initialDate.getFullYear());
   const currentMonth = ref(initialDate.getMonth());
   const selectedDate = ref<Date | null>(null);
@@ -50,8 +51,17 @@ export const useCalendar = (initialDate: Date = new Date()) => {
     const offset = startOffset.value;
 
     // empty squares
+    const prevMonthDays = new Date(year, month, 0).getDate();
     for (let i = offset - 1; i >= 0; i--) {
-      days.push(null);
+      const dayNum = prevMonthDays - i;
+      const date = new Date(year, month - 1, dayNum);
+      days.push({
+        date,
+        day: dayNum,
+        isToday: false,
+        isSelected: false,
+        isCurrentMonth: false,
+      });
     }
 
     // current month
@@ -67,6 +77,7 @@ export const useCalendar = (initialDate: Date = new Date()) => {
         day,
         isToday,
         isSelected,
+        isCurrentMonth: true,
       });
     }
 
@@ -80,8 +91,13 @@ export const useCalendar = (initialDate: Date = new Date()) => {
     return date;
   };
 
-  const headerTitle = computed(() => {
-    return `${MONTH_NAMES[currentMonth.value]} ${currentYear.value}`;
+  const headerTitle = ref('');
+  const weekdays = ref<string[]>([]);
+
+  watchEffect(() => {
+    const loc = locales[localeRef.value];
+    headerTitle.value = `${loc.months[currentMonth.value]} ${currentYear.value}`;
+    weekdays.value = loc.weekdays;
   });
 
   return {
@@ -90,6 +106,7 @@ export const useCalendar = (initialDate: Date = new Date()) => {
     selectedDate,
     headerTitle,
     calendarGrid,
+    weekdays,
     prevMonth,
     nextMonth,
     selectDate,
