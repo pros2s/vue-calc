@@ -1,4 +1,4 @@
-import type { MonthNameType } from '../types/CalendarType';
+import type { MonthNameType } from '../CalendarTypes';
 
 export const MONTH_NAMES: readonly MonthNameType[] = [
   'Янв',

@@ -1,11 +1,16 @@
 <script setup lang="ts">
 import Header from './children/Header/Header.vue';
 import WeekDays from './children/WeekDays/WeekDays.vue';
-
-import { useCalendar } from './hooks/useCalendar';
-
-import { WEEK_DAYS } from './consts/weekDays';
 import Day from './children/Day/Day.vue';
+
+import type { CalendarPropsI } from './CalendarTypes';
+import { useInitialDate } from './hooks/useInitialDate';
+import { useCalendar } from './hooks/useCalendar';
+import { WEEK_DAYS } from './consts/weekDays';
+
+const props = defineProps<CalendarPropsI>();
+
+const initialDate = useInitialDate(props.initialDate);
 
 const {
   headerTitle,
@@ -13,10 +18,14 @@ const {
   prevMonth,
   nextMonth,
   selectDate
-} = useCalendar()
+} = useCalendar(initialDate.value);
+
+if (props.initialDate) {
+  selectDate(initialDate.value);
+}
 
 const handleDayClick = (date: Date | null) => {
-  selectDate(date)
+  selectDate(date);
 }
 </script>
 

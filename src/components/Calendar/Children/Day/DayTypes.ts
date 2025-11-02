@@ -1,4 +1,4 @@
-import type { CalendarDayI } from '../../types/CalendarType';
+import type { CalendarDayI } from '../../CalendarTypes';
 
 export interface DayPropsI {
   day: CalendarDayI | null;

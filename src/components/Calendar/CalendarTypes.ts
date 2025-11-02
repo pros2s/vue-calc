@@ -21,3 +21,7 @@ export interface CalendarDayI {
 }
 
 export type CalendarDaysType = (CalendarDayI | null)[];
+
+export interface CalendarPropsI {
+  initialDate?: string;
+}

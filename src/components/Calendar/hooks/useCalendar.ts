@@ -1,5 +1,5 @@
 import { computed, ref } from 'vue';
-import type { CalendarDaysType } from '../types/CalendarType';
+import type { CalendarDaysType } from '../CalendarTypes';
 import { MONTH_NAMES } from '../consts/monthNames';
 
 export const useCalendar = (initialDate: Date = new Date()) => {
@@ -76,6 +76,7 @@ export const useCalendar = (initialDate: Date = new Date()) => {
   const selectDate = (date: Date | null) => {
     selectedDate.value = date;
 
+    console.log(date);
     return date;
   };
 
