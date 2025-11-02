@@ -1,74 +1,19 @@
 <script setup lang="ts">
-import { ref, computed } from 'vue';
+import { useCalendar, WEEK_DAYS } from './hooks/useCalendar';
 
-const year = ref(new Date().getFullYear());
-const month = ref(new Date().getMonth());
+const {
+  headerTitle,
+  calendarGrid,
+  prevMonth,
+  nextMonth,
+  selectDate
+} = useCalendar()
 
-const monthNames = [
-	'Январь',
-	'Февраль',
-	'Март',
-	'Апрель',
-	'Май',
-	'Июнь',
-	'Июль',
-	'Август',
-	'Сентябрь',
-	'Октябрь',
-	'Ноябрь',
-	'Декабрь',
-] as const;
+const handleDayClick = (date?: Date) => {
+  if (!date) return;
 
-const weekDays = ['Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб', 'Вс'] as const;
-
-// months
-const prevMonth = () => {
-	if (month.value === 0) {
-		month.value = 11;
-		year.value--;
-	} else {
-		month.value--;
-	}
-};
-
-const nextMonth = () => {
-	if (month.value === 11) {
-		month.value = 0;
-		year.value++;
-	} else {
-		month.value++;
-	}
-};
-
-const firstDayOfMonth = computed(() =>
-	new Date(year.value, month.value, 1).getDay(),
-);
-
-const daysInMonth = computed(() =>
-	new Date(year.value, month.value + 1, 0).getDate(),
-);
-
-// empty squares before start day
-const startOffset = computed(() => {
-	const day = firstDayOfMonth.value;
-	return day === 0 ? 6 : day - 1;
-});
-
-// calendar net
-const calendarDays = computed((): (number | null)[] => {
-	const days: (number | null)[] = [];
-
-	// empty squares
-	for (let i = 0; i < startOffset.value; i++) {
-		days.push(null);
-	}
-
-	for (let day = 1; day <= daysInMonth.value; day++) {
-		days.push(day);
-	}
-
-	return days;
-});
+  selectDate(date)
+}
 </script>
 
 <template>
@@ -76,13 +21,13 @@ const calendarDays = computed((): (number | null)[] => {
 		<!-- Header -->
 		<div class="calendar-header">
 			<button @click="prevMonth" class="nav-btn left-arrow"/>
-			<p>{{ monthNames[month] }} {{ year }}</p>
+			<p>{{ headerTitle }}</p>
 			<button @click="nextMonth" class="nav-btn right-arrow"/>
 		</div>
 
 		<!-- Week days -->
 		<div class="weekdays">
-			<span v-for="day in weekDays" :key="day" class="weekday">
+			<span v-for="day in WEEK_DAYS" :key="day" class="weekday">
 				{{ day }}
 			</span>
 		</div>
@@ -90,11 +35,13 @@ const calendarDays = computed((): (number | null)[] => {
 		<!-- Month's days -->
 		<div class="days">
 			<button
-				v-for="(day, index) in calendarDays"
+				v-for="(day, index) in calendarGrid"
 				:key="index"
+        :day="day"
 				:class="{ day: true, empty: !day }"
+        @click="handleDayClick(day?.date)"
 			>
-				{{ day ?? '' }}
+				{{ day?.day ?? '' }}
 			</button>
 		</div>
 	</div>
@@ -135,7 +82,7 @@ const calendarDays = computed((): (number | null)[] => {
 .weekdays {
   display: flex;
   justify-content: space-around;
-  font-size: 1rem;
+  font-size: 0.8rem;
 }
 
 .days {
