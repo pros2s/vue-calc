@@ -2,6 +2,7 @@
 import { WEEK_DAYS } from './consts/weekDays';
 import Header from './Header/Header.vue';
 import { useCalendar,  } from './hooks/useCalendar';
+import WeekDays from './WeekDays/WeekDays.vue';
 
 const {
   headerTitle,
@@ -22,12 +23,7 @@ const handleDayClick = (date?: Date) => {
 	<div class="calendar">
     <Header :title="headerTitle" @prev="prevMonth" @next="nextMonth"/>
 
-		<!-- Week days -->
-		<div class="weekdays">
-			<span v-for="day in WEEK_DAYS" :key="day" class="weekday">
-				{{ day }}
-			</span>
-		</div>
+		<WeekDays :week-days="WEEK_DAYS"/>
 
 		<!-- Month's days -->
 		<div class="days">
@@ -49,12 +45,6 @@ const handleDayClick = (date?: Date) => {
 	max-width: 320px;
 	border: 1px solid gray;
   margin: auto;
-}
-
-.weekdays {
-  display: flex;
-  justify-content: space-around;
-  font-size: 0.8rem;
 }
 
 .days {
