@@ -1,5 +1,7 @@
 <script setup lang="ts">
-import { useCalendar, WEEK_DAYS } from './hooks/useCalendar';
+import { WEEK_DAYS } from './consts/weekDays';
+import Header from './Header/Header.vue';
+import { useCalendar,  } from './hooks/useCalendar';
 
 const {
   headerTitle,
@@ -18,12 +20,7 @@ const handleDayClick = (date?: Date) => {
 
 <template>
 	<div class="calendar">
-		<!-- Header -->
-		<div class="calendar-header">
-			<button @click="prevMonth" class="nav-btn left-arrow"/>
-			<p>{{ headerTitle }}</p>
-			<button @click="nextMonth" class="nav-btn right-arrow"/>
-		</div>
+    <Header :title="headerTitle" @prev="prevMonth" @next="nextMonth"/>
 
 		<!-- Week days -->
 		<div class="weekdays">
@@ -52,31 +49,6 @@ const handleDayClick = (date?: Date) => {
 	max-width: 320px;
 	border: 1px solid gray;
   margin: auto;
-}
-
-.calendar-header {
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-  padding: 10px;
-  font-size: 1.1rem;
-  margin-bottom: 5px;
-}
-
-.nav-btn {
-  width: 0;
-  height: 0;
-  border-top: 5px solid transparent;
-  border-bottom: 5px solid transparent;
-
-}
-
-.left-arrow {
-  border-right: 8px solid #fff;
-}
-
-.right-arrow {
-  border-left: 8px solid #fff;
 }
 
 .weekdays {

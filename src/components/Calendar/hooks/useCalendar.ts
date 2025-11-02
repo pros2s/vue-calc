@@ -1,22 +1,6 @@
 import { computed, ref } from 'vue';
-import type { CalendarDaysType, MonthNameType, WeekDayType } from '../types/CalendarType';
-
-export const MONTH_NAMES: readonly MonthNameType[] = [
-  'Янв',
-  'Фев',
-  'Мар',
-  'Апр',
-  'Май',
-  'Июн',
-  'Июл',
-  'Авг',
-  'Сен',
-  'Окт',
-  'Ноя',
-  'Дек',
-] as const;
-
-export const WEEK_DAYS: readonly WeekDayType[] = ['Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб', 'Вс'] as const;
+import type { CalendarDaysType } from '../types/CalendarType';
+import { MONTH_NAMES } from '../consts/monthNames';
 
 export const useCalendar = (initialDate: Date = new Date()) => {
   const currentYear = ref(initialDate.getFullYear());
