@@ -1,10 +1,11 @@
 <script setup lang="ts">
-import Header from './Children/Header/Header.vue';
-import WeekDays from './Children/WeekDays/WeekDays.vue';
+import Header from './children/Header/Header.vue';
+import WeekDays from './children/WeekDays/WeekDays.vue';
 
-import { useCalendar,  } from './hooks/useCalendar';
+import { useCalendar } from './hooks/useCalendar';
 
 import { WEEK_DAYS } from './consts/weekDays';
+import Day from './children/Day/Day.vue';
 
 const {
   headerTitle,
@@ -13,6 +14,10 @@ const {
   nextMonth,
   selectDate
 } = useCalendar()
+
+const handleDayClick = (date: Date | null) => {
+  selectDate(date)
+}
 </script>
 
 <template>
@@ -21,35 +26,17 @@ const {
 
 		<WeekDays :week-days="WEEK_DAYS"/>
 
-		<!-- Month's days -->
 		<div class="days">
-			<button
-				v-for="(day, index) in calendarGrid"
-				:key="index"
+			<Day
+        v-for="(day, index) in calendarGrid"
+        :key="new Date().getTime() + index"
         :day="day"
-				:class="{ day: true, empty: !day }"
-        @click="selectDate(day?.date)"
-			>
-				{{ day?.day ?? '' }}
-			</button>
+        @click="handleDayClick"
+      />
 		</div>
 	</div>
 </template>
 
 <style scoped>
-.calendar {
-	max-width: 320px;
-	border: 1px solid gray;
-  margin: auto;
-}
-
-.days {
-	display: grid;
-	grid-template-columns: repeat(7, 1fr);
-}
-
-.day {
-  text-align: center;
-  padding: 10px;
-}
+@import './calendar.css'
 </style>

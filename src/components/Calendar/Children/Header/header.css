@@ -10,30 +10,30 @@
   padding: 16px;
 
   transition: background-color 0.1s linear;
-}
 
-.nav-btn:hover .arrow {
-  transform: scale(1.3);
-}
+  &:hover {
+    background-color: #313131;
 
-.nav-btn:hover {
-  background-color: #313131;
-}
+    .arrow {
+      transform: scale(1.3);
+    }
+  }
 
-.arrow {
-  display: block;
-  width: 0;
-  height: 0;
-  border-top: 5px solid transparent;
-  border-bottom: 5px solid transparent;
+  .arrow {
+    display: block;
+    width: 0;
+    height: 0;
+    border-top: 5px solid transparent;
+    border-bottom: 5px solid transparent;
 
-  transition: transform 0.1s linear;
-}
+    transition: transform 0.1s linear;
 
-.left-arrow {
-  border-right: 8px solid #fff;
-}
+    &.left-arrow {
+      border-right: 8px solid #fff;
+    }
 
-.right-arrow {
-  border-left: 8px solid #fff;
+    &.right-arrow {
+      border-left: 8px solid #fff;
+    }
+  }
 }

@@ -14,7 +14,7 @@ export type MonthNameType =
   | 'Дек';
 
 export interface CalendarDayI {
-  date: Date;
+  date: Date | null;
   day: number;
   isToday: boolean;
   isSelected: boolean;

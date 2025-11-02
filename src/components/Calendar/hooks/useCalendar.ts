@@ -59,6 +59,7 @@ export const useCalendar = (initialDate: Date = new Date()) => {
       const date = new Date(year, month, day);
       date.setHours(0, 0, 0, 0);
       const isToday = date.getTime() === today.getTime();
+
       const isSelected = selectedDate.value?.getTime() === date.getTime();
 
       days.push({
@@ -72,9 +73,7 @@ export const useCalendar = (initialDate: Date = new Date()) => {
     return days;
   });
 
-  const selectDate = (date?: Date) => {
-    if (!date) return;
-
+  const selectDate = (date: Date | null) => {
     selectedDate.value = date;
 
     return date;

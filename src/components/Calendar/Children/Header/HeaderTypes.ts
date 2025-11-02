@@ -1,8 +1,8 @@
-export interface PropsI {
+export interface HeaderPropsI {
   title: string;
 }
 
-export interface EmitsI {
+export interface HeaderEmitsI {
   (evt: 'prev'): void;
   (evt: 'next'): void;
 }

@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import type { EmitsI, PropsI } from './HeaderTypes';
+import type { HeaderEmitsI, HeaderPropsI } from './HeaderTypes';
 
-defineProps<PropsI>();
-const emit = defineEmits<EmitsI>();
+defineProps<HeaderPropsI>();
+const emit = defineEmits<HeaderEmitsI>();
 </script>
 
 <template>
